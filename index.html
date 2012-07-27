@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html manifest="/cache.manifest">
+<head>
+  <meta charset="UTF-8">
+	<title>SF Bike Map</title>
+	<!-- Mobile Settings -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<!-- Icons -->
+	<!-- iPhone -->
+	<link href="images/apple/icon-57x57.png" sizes="57x57" rel="apple-touch-icon-precomposed">
+	<!-- iPad -->
+	<link href="images/apple/icon-72x72.png" sizes="72x72" rel="apple-touch-icon-precomposed">
+	<!-- iPhone Retina -->
+	<link href="images/apple/icon-114x114.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+	<!-- iPad Retina -->
+	<link href="images/apple/icon-144x144.png" sizes="144x144" rel="apple-touch-icon-precomposed">
+	<!-- Splashscreens -->
+	<!-- iPhone -->
+	<link href="images/apple/startup-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+	<!-- iPhone Retina -->
+	<link href="images/apple/startup-640x920.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPad portrait -->
+	<link href="images/apple/startup-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+	<!-- iPad landscape -->
+	<link href="images/apple/startup-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+	<!-- iPad Retina, portrait -->
+	<link href="images/apple/startup-1536x2008.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPad Retina, landscape -->
+	<link href="images/apple/startup-1496x2048.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/libs/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body class="home">
+
+	<div id="content-wrapper">
+
+		<div id="form-wrapper">
+			<form>
+				<!--
+				<div id="origin-input-wrapper">
+					<input type="text" id="origin-input" class="hidden" placeholder="Enter your starting location">
+				</div>
+				-->
+				<div id="destination-input-wrapper" class="input-wrapper">
+					<input type="search" id="destination-input" class="clearable" placeholder="Enter your destination" autocorrect='off' autocapitalize='on' required>
+					<a class="clear" id="destination-input-clear" href="#"></a>
+				</div>
+			</form>
+		</div>
+
+		<div id="map-canvas"></div>
+
+		<div id="destination-list-wrapper">
+			<ul id="destination-list" class="table">
+				<!--<li><span class="address">743 Haight St, San Francisco, CA 94117</span></li>-->
+			</ul>
+		</div>
+
+	</div>
+
+	<!--<script type="text/javascript" src="js/libs/live.js"></script>-->
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCR1Kzq1ydrPg3tTGiqC2iBnhSxLy3lVUw&sensor=true"></script>
+	<script type="text/javascript" src="js/libs/lawnchair.js"></script>
+	<script type="text/javascript" src="js/libs/zepto.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/local-storage.js"></script>
+	<script type="text/javascript" src="js/bike-local-storage.js"></script>
+	<script type="text/javascript" src="js/bike-map.js"></script>
+	<script type="text/javascript" src="js/current-location.js"></script>
+	<script type="text/javascript" src="js/bike-map-page.js"></script>
+	<script type="text/javascript">
+		window.addToHomeConfig = {
+			autostart: true,
+			returningVisitor: true,
+			animationIn: 'bubble', //  drop, bubble and fade
+			animationOut: 'drop',
+			startDelay: 2000,
+			lifespan: 10000,
+			bottomOffset: 14,
+			expire:2,
+			touchIcon:true,
+			message:'Install this web app on your %device: tap `%icon` and then <strong>`Add to Home Screen`</strong>.'
+		}
+	</script>
+	<script type="text/javascript" src="js/libs/add2home.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

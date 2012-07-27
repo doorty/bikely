@@ -1,0 +1,1 @@
+$(document).ready( (-> new window.BikeMapPage()) )

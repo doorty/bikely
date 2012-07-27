@@ -1,0 +1,87 @@
+////////////////////////////////////////////
+// global
+////////////////////////////////////////////
+
+* {
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:        border-box;
+}
+
+body {
+	font: {
+		family:"Helvetica Neue", Helvetica, Arial, sans-serif
+	}
+	height:100%;
+}
+
+.hidden {
+	display:none;
+}
+
+.table {
+	display:table;
+	> * {
+		display:table-row;
+		> * {
+			display:table-cell;
+			vertical-align:middle;	
+		}
+	}
+}
+
+// clear button for inputs
+span.clear-icon {
+	position: relative;
+	span {
+		position: absolute;
+		display: block;
+		top: 5px;
+		right: 0px;
+		width: 16px;
+		height: 16px;
+		background: url('http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=4') 0 -690px;
+		cursor: pointer;
+	}
+	input {
+		padding-right: 16px;
+	}
+}
+
+
+// retina screen, adjust current location marker
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (device-width: 768px) {
+	#map-canvas div.gmnoprint[title="Current Location"] {
+		margin:-9px 0 0 -9px !important;
+	}
+}
+
+@-moz-keyframes pulsate {
+	0% {
+		-moz-transform: scale(0.25);
+		opacity: 1.0;
+	}
+	95% {
+		-moz-transform: scale(1.3);
+		opacity: 0;
+		}
+	100% {
+		-moz-transform: scale(0.3);
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes pulsate {
+	0% {
+		-webkit-transform: scale(0.25);
+		opacity: 1.0;
+	}
+	95% {
+		-webkit-transform: scale(1.3);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: scale(0.3);
+		opacity: 0;
+	}
+}
