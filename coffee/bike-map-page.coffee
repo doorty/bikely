@@ -18,11 +18,11 @@ class window.BikeMapPage
 		@setupMap()
 		@setupLocalStorage()
 		@setupInput()
-		@hideAddressBar()
+		@initPage()
 		
-	hideAddressBar: ->
+	initPage: ->
 		window.scrollTo(0, 0)
-		#setTimeout( (-> window.scrollTo(0, 1) ), 1000);
+		setTimeout( (-> addToHome.show() ), 2000);
 		
 	updateMapOrigin: (latLngArray) ->
 		@location.origin = latLngArray
@@ -44,7 +44,6 @@ class window.BikeMapPage
 			utils.log "current position is " + latLngArray[0] + ", " + latLngArray[1]
 			@location.currentLocation = latLngArray
 			@updateMapOrigin(latLngArray)
-			@localStorage.saveCurrentLocation(latLngArray)
 		else
 			# prompt the user to enter current location?
 			utils.log  "Where are you? " + status
@@ -114,12 +113,6 @@ class window.BikeMapPage
 	setupLocalStorage: ->
 		@localStorage = new BikeLocalStorage()
 
-		currentLocationCallback = (location) =>
-			#alert "currentLocationCallback: " + location
-			if location?
-				@location.currentLocation = location
-				@updateMapOrigin(location)
-
 		directionsCallback = (obj) =>
 			#alert "directionsCallback: " + JSON.stringify(obj)
 			if obj?
@@ -129,8 +122,7 @@ class window.BikeMapPage
 				if obj.destination?
 					@location.destination = obj.destination
 					@updateMapDestinationAndDirections(obj.destination)
-		
-		@localStorage.getCurrentLocation(currentLocationCallback)
+
 		@localStorage.getDirections(directionsCallback)
 	
 	setupMap: ->

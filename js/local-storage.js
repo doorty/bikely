@@ -16,81 +16,28 @@
     }
 
     LocalStorage.prototype.save = function(key, value, callback) {
-      var saveObj;
-      if (callback == null) {
-        callback = function(obj) {
-          return utils.log(obj);
-        };
-      }
-      saveObj = {
-        "key": key,
-        "value": value
-      };
-      return this.storage.save(saveObj);
+      return this.saveCookie(key, value, callback);
     };
 
-    LocalStorage.prototype.saveMultiple = function(keyValueArray, callback) {
-      if (callback == null) {
-        callback = function(obj) {
-          return utils.log(obj);
-        };
-      }
-      return this.storage.batch(keyValueArray, callback);
+    LocalStorage.prototype.saveCookie = function(key, value, callback) {
+      var saved;
+      saved = $.cookie(key, JSON.stringify(value));
+      return alert("saved: " + saved);
     };
 
     LocalStorage.prototype.get = function(key, callback) {
-      var cb;
-      cb = function(obj) {
-        return callback(obj && obj.value ? obj.value : null);
-      };
-      return this.storage.get(key, cb);
+      return this.getCookie(key, callback);
     };
 
-    LocalStorage.prototype.getEverything = function(callback) {
-      if (callback == null) {
-        callback = function(obj) {
-          return utils.log(obj);
-        };
-      }
-      return this.storage.all(callback);
-    };
-
-    LocalStorage.prototype.exists = function(key, callback) {
-      if (callback == null) {
-        callback = function() {
-          return function(exists) {
-            return utils.log("Existence is " + exists);
-          };
-        };
-      }
-      return this.storage.exists(key, callback);
+    LocalStorage.prototype.getCookie = function(key, callback) {
+      var resultObj;
+      resultObj = JSON.parse($.cookie(key));
+      alert("get: " + resultObj);
+      return callback(resultObj);
     };
 
     LocalStorage.prototype.remove = function(key, callback) {
-      if (callback == null) {
-        callback = function(obj) {
-          return utils.log(obj);
-        };
-      }
-      return this.storage.remove(key, callback);
-    };
-
-    LocalStorage.prototype.removeMultiple = function(array, callback) {
-      if (callback == null) {
-        callback = function(obj) {
-          return utils.log(obj);
-        };
-      }
-      return this.storage.remove(array, callback);
-    };
-
-    LocalStorage.prototype.removeEverything = function(callback) {
-      if (callback == null) {
-        callback = function(obj) {
-          return utils.log(obj);
-        };
-      }
-      return this.storage.nuke(callback);
+      return $.cookie(key, null);
     };
 
     return LocalStorage;

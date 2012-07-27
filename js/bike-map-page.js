@@ -26,11 +26,14 @@
       this.setupMap();
       this.setupLocalStorage();
       this.setupInput();
-      this.hideAddressBar();
+      this.initPage();
     }
 
-    BikeMapPage.prototype.hideAddressBar = function() {
-      return window.scrollTo(0, 0);
+    BikeMapPage.prototype.initPage = function() {
+      window.scrollTo(0, 0);
+      return setTimeout((function() {
+        return addToHome.show();
+      }), 2000);
     };
 
     BikeMapPage.prototype.updateMapOrigin = function(latLngArray) {
@@ -52,8 +55,7 @@
       if (latLngArray != null) {
         utils.log("current position is " + latLngArray[0] + ", " + latLngArray[1]);
         this.location.currentLocation = latLngArray;
-        this.updateMapOrigin(latLngArray);
-        return this.localStorage.saveCurrentLocation(latLngArray);
+        return this.updateMapOrigin(latLngArray);
       } else {
         return utils.log("Where are you? " + status);
       }
@@ -138,15 +140,9 @@
     };
 
     BikeMapPage.prototype.setupLocalStorage = function() {
-      var currentLocationCallback, directionsCallback,
+      var directionsCallback,
         _this = this;
       this.localStorage = new BikeLocalStorage();
-      currentLocationCallback = function(location) {
-        if (location != null) {
-          _this.location.currentLocation = location;
-          return _this.updateMapOrigin(location);
-        }
-      };
       directionsCallback = function(obj) {
         if (obj != null) {
           if (obj.origin != null) {
@@ -159,7 +155,6 @@
           }
         }
       };
-      this.localStorage.getCurrentLocation(currentLocationCallback);
       return this.localStorage.getDirections(directionsCallback);
     };
 

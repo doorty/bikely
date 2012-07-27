@@ -11,19 +11,6 @@
       return BikeLocalStorage.__super__.constructor.apply(this, arguments);
     }
 
-    BikeLocalStorage.prototype.saveCurrentLocation = function(location, callback) {
-      var key, value;
-      key = "currentLocation";
-      value = location;
-      return this.save(key, value, callback);
-    };
-
-    BikeLocalStorage.prototype.getCurrentLocation = function(callback) {
-      var key;
-      key = "currentLocation";
-      return this.get(key, callback);
-    };
-
     BikeLocalStorage.prototype.saveDirections = function(origin, destination, callback) {
       var key, value;
       key = "directions";
@@ -38,72 +25,6 @@
       var key;
       key = "directions";
       return this.get(key, callback);
-    };
-
-    BikeLocalStorage.prototype.addToDirectionsHistory = function(directionsObj, callback) {
-      var gotHistoryCallback, historyExistsCallback, key, saveHistory;
-      key = "directionsHistory";
-      historyExistsCallback = function(hasHistory) {
-        if (hasHistory) {
-          return this.storage.get(key, gotHistoryCallback);
-        } else {
-          return saveHistory([directionsObj]);
-        }
-      };
-      gotHistoryCallback = function(historyObj) {
-        var historyArray;
-        historyArray = historyObj.options;
-        historyArray.push(directionsObj);
-        return saveHistory(historyArray);
-      };
-      saveHistory = function(historyArray) {
-        var obj;
-        obj = {
-          key: key,
-          options: historyArray
-        };
-        return this.storage.save(obj, callback);
-      };
-      return this.storage.exists(key, historyExistsCallback);
-    };
-
-    BikeLocalStorage.prototype.getDirectionsHistory = function(callback) {
-      var key;
-      key = "directionsHistory";
-      return this.storage.get(key, callback);
-    };
-
-    BikeLocalStorage.prototype.addToCurrentLocationHistory = function(locationObj, callback) {
-      var gotHistoryCallback, historyExistsCallback, key, saveHistory;
-      key = "currentLocations";
-      gotHistoryCallback = function(historyObj) {
-        var historyArray;
-        historyArray = historyObj.options;
-        historyArray.push(directionsObj);
-        return saveHistory(historyArray);
-      };
-      saveHistory = function(historyArray) {
-        var obj;
-        obj = {
-          key: key,
-          options: historyArray
-        };
-        return this.storage.save(obj, callback);
-      };
-      historyExistsCallback = function(hasHistory) {
-        if (hasHistory) {
-          return this.storage.get(key, gotHistoryCallback);
-        } else {
-          return saveHistory([locationObj]);
-        }
-      };
-      return this.storage.exists(key, historyExistsCallback);
-    };
-
-    BikeLocalStorage.prototype.getCurrentLocationHistory = function(callback) {
-      var key;
-      key = "currentLocations";
-      return this.storage.get(key, callback);
     };
 
     return BikeLocalStorage;
